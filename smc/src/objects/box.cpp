@@ -72,6 +72,10 @@ cBaseBox :: ~cBaseBox( void )
 
 void cBaseBox :: Load_From_XML( CEGUI::XMLAttributes &attributes )
 {
+    // for genAlgo, do not place text boxes
+    if (box_type == TYPE_TEXT_BOX) {
+        return;
+    }
 	// position
 	Set_Pos( static_cast<float>(attributes.getValueAsInteger( "posx" )), static_cast<float>(attributes.getValueAsInteger( "posy" )), 1 );
 	if( box_type != TYPE_SPIN_BOX && box_type != TYPE_TEXT_BOX )
