@@ -1689,7 +1689,7 @@ cSprite *Create_Level_Object_From_XML( const CEGUI::String &xml_element, CEGUI::
 
 		return moving_platform;
 	}
-	else if( element == "enemy" )
+    else if( false ) //element == "enemy" )
 	{
 		CEGUI::String str_type = attributes.getValueAsString( "type" );
 
