@@ -237,7 +237,7 @@ void cLevel_Player :: DownGrade_Player( bool delayed /* = 1 */, bool force /* = 
 	pHud_Time->Reset();
 	pHud_Points->Clear();
 	Ball_Clear();
-	pHud_Lives->Add_Lives( -1 );
+    //pHud_Lives->Add_Lives( -1 );
 	pAudio->Fadeout_Music( 1700 );
 
 	// lost a live
