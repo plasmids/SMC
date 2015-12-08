@@ -37,6 +37,7 @@
 #include "../video/renderer.h"
 #include "../core/i18n.h"
 #include "../gui/generic.h"
+#include "../core/ga_manager.h"
 
 #ifdef __APPLE__
 // needed for datapath detection
