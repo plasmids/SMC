@@ -26,7 +26,7 @@ public:
     int m_generation;
 
 protected:
-    bool compare_rank(cGA_Run a, cGA_Run b);
+    bool Compare_Rank(cGA_Run a, cGA_Run b);
 };
 
 extern cGA_Manager *pGA_Manager;

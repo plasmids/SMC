@@ -30,6 +30,11 @@ cGA_Manager :: ~cGA_Manager()
 
 }
 
+bool cGA_Manager :: Compare_Rank(cGA_Run a, cGA_Run b)
+{
+    return a.Score() > b.Score();
+}
+
 cGA_Manager *pGA_Manager = NULL;
 
 } // namespace SMC
