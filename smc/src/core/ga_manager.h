@@ -9,10 +9,11 @@ namespace SMC {
 class cGA_Run {
     cGA_Run();
     ~cGA_Run();
-    float score();
+    float Score();
 
-    std::vector<float> jumps;
-    float progress;
+    std::vector<float> m_jumps;
+    float m_progress;
+    static const float PROGRESS_WEIGHT, JUMPS_WEIGHT;
 };
 
 class cGA_Manager {
@@ -21,8 +22,8 @@ public:
     ~cGA_Manager();
 
     float m_level_length;
-    std::vector<cGA_Run> runs;
-    int generation;
+    std::vector<cGA_Run> m_runs;
+    int m_generation;
 
 protected:
     bool compare_rank(cGA_Run a, cGA_Run b);

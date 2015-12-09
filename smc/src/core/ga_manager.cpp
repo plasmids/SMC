@@ -2,6 +2,9 @@
 
 namespace SMC {
 
+const float cGA_Run::PROGRESS_WEIGHT = 0.5f;
+const float cGA_Run::JUMPS_WEIGHT = 0.5f;
+
 cGA_Run :: cGA_Run()
 {
 
@@ -10,6 +13,11 @@ cGA_Run :: cGA_Run()
 cGA_Run :: ~cGA_Run()
 {
 
+}
+
+float cGA_Run :: Score()
+{
+    return m_progress * PROGRESS_WEIGHT + m_jumps.size() * JUMPS_WEIGHT;
 }
 
 cGA_Manager :: cGA_Manager()
