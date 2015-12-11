@@ -88,6 +88,9 @@ public:
 	 * if delayed is set the downgrade is handled on the next game update
 	 * force : dies or a complete downgrade
 	*/
+
+    void Reset_Run();
+
 	void DownGrade_Player( bool delayed = 1, bool force = 0 );
 
 	// moves in the current direction

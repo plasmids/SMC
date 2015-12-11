@@ -188,6 +188,11 @@ bool cLevel_Player :: Set_On_Ground( cSprite *obj, bool set_on_top /* = 1 */ )
 	return valid;
 }
 
+void cLevel_Player :: Reset_Run() {
+    m_goldpieces = 0;
+    m_points = 0;
+}
+
 void cLevel_Player :: DownGrade( bool force /* = 0 */ )
 {
 	DownGrade_Player( 1, force );
@@ -448,13 +453,15 @@ animation_end:
 	}
 
     Set_Type( MARYO_SMALL, 0, 0 );
-    Game_Action = GA_ENTER_LEVEL;
-	// fade out
+
+    Reset_Run();
     std::string str_level = Trim_Filename( pActive_Level->m_level_filename, 0, 0 );
 	Game_Action_Data_Start.add( "music_fadeout", "1500" );
 	Game_Action_Data_Start.add( "screen_fadeout", CEGUI::PropertyHelper::intToString( EFFECT_OUT_BLACK ) );
 	Game_Action_Data_Start.add( "screen_fadeout_speed", "3" );
 	// delay unload level
+    Game_Action = GA_ENTER_LEVEL;
+    Game_Action_Data_Middle.add( "unload_levels", "1" );
     Game_Action_Data_Middle.add( "load_level", str_level.c_str() );
 	Game_Action_Data_End.add( "screen_fadein", CEGUI::PropertyHelper::intToString( EFFECT_IN_BLACK ) );
     Game_Action_Data_End.add( "activate_level_entry", str_level.c_str() );
