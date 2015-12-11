@@ -27,6 +27,8 @@ smc_SOURCES = \
 	core/filesystem/resource_manager.h \
 	core/framerate.cpp \
 	core/framerate.h \
+	core/ga_manager.cpp \
+	core/ga_manager.h \
 	core/game_core.cpp \
 	core/game_core.h \
 	core/global_basic.h \
