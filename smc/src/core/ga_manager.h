@@ -7,6 +7,7 @@
 namespace SMC {
 
 class cGA_Run {
+public:
     cGA_Run();
     ~cGA_Run();
     void Score(float progress);
