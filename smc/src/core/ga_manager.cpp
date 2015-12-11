@@ -18,7 +18,7 @@ cGA_Run :: ~cGA_Run()
 float cGA_Run :: Score(float progress)
 {
     m_progress = progress;
-    m_score = m_progress * PROGRESS_WEIGHT + m_jumps.size() * JUMPS_WEIGHT;
+    m_score = m_progress * PROGRESS_WEIGHT +  JUMPS_WEIGHT / m_jumps.size();
 }
 
 cGA_Manager :: cGA_Manager()
