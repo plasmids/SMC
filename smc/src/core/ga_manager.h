@@ -9,8 +9,9 @@ namespace SMC {
 class cGA_Run {
     cGA_Run();
     ~cGA_Run();
-    float Score();
+    void Score(float progress);
 
+    float m_score;
     std::vector<float> m_jumps;
     float m_progress;
     static const float PROGRESS_WEIGHT, JUMPS_WEIGHT;

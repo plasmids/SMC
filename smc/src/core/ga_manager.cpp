@@ -15,9 +15,10 @@ cGA_Run :: ~cGA_Run()
 
 }
 
-float cGA_Run :: Score()
+float cGA_Run :: Score(float progress)
 {
-    return m_progress * PROGRESS_WEIGHT + m_jumps.size() * JUMPS_WEIGHT;
+    m_progress = progress;
+    m_score = m_progress * PROGRESS_WEIGHT + m_jumps.size() * JUMPS_WEIGHT;
 }
 
 cGA_Manager :: cGA_Manager()
@@ -32,7 +33,7 @@ cGA_Manager :: ~cGA_Manager()
 
 bool cGA_Manager :: Compare_Rank(cGA_Run a, cGA_Run b)
 {
-    return a.Score() > b.Score();
+    return a.score > b.score;
 }
 
 cGA_Manager *pGA_Manager = NULL;
