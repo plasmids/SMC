@@ -678,7 +678,7 @@ void cLevel_Player :: Update_Walking( void )
 	}
 
 	// only if left or right is pressed
-	if( pKeyboard->m_keys[pPreferences->m_key_left] || pKeyboard->m_keys[pPreferences->m_key_right] || pJoystick->m_left || pJoystick->m_right )
+    if( true ) //pKeyboard->m_keys[pPreferences->m_key_left] || pKeyboard->m_keys[pPreferences->m_key_right] || pJoystick->m_left || pJoystick->m_right )
 	{
 		float ground_mod = 1.0f;
 
@@ -801,7 +801,7 @@ void cLevel_Player :: Update_Staying( void )
 	}
 
 	// if left and right is not pressed
-	if( !pKeyboard->m_keys[pPreferences->m_key_left] && !pKeyboard->m_keys[pPreferences->m_key_right] && !pJoystick->m_left && !pJoystick->m_right )
+    if( pKeyboard->m_keys[pPreferences->m_key_left] && !pKeyboard->m_keys[pPreferences->m_key_right] && !pJoystick->m_left && !pJoystick->m_right )
 	{
 		// walking
 		if( m_velx )
@@ -939,7 +939,7 @@ void cLevel_Player :: Update_Flying( void )
 			}
 		}
 		// move right
-		else if( ( pKeyboard->m_keys[pPreferences->m_key_right] || pJoystick->m_right ) && !m_ducked_counter )
+        else if( !m_ducked_counter )
 		{
 			if( !m_parachute )
 			{
@@ -1447,7 +1447,7 @@ void cLevel_Player :: Update_Jump( void )
 		}
 		
 	}	
-	else if( ( pKeyboard->m_keys[pPreferences->m_key_right] || pJoystick->m_right ) && !m_ducked_counter )
+    else if( !m_ducked_counter )
 	{
 		const float max_vel = 10.0f * Get_Vel_Modifier();
 
@@ -2194,7 +2194,7 @@ void cLevel_Player :: Update( void )
 	Update_Walking();
 	Update_Running();
 	Update_Ducking();
-	Update_Staying();
+    //Update_Staying();
 	Update_Flying();
 	// throw animation counter
 	if( m_throwing_counter > 0.0f )
@@ -3274,7 +3274,7 @@ float cLevel_Player :: Get_Vel_Modifier( void ) const
 	float vel_mod = 1.0f;
 
 	// if running key is pressed or always run
-	if( pPreferences->m_always_run || pKeyboard->m_keys[pPreferences->m_key_action] || pJoystick->Button( pPreferences->m_joy_button_action ) )
+    if( pPreferences->m_always_run || pKeyboard->m_keys[pPreferences->m_key_action] || pJoystick->Button( pPreferences->m_joy_button_action ) )
 	{
 		vel_mod = 1.5f;
 	}
@@ -3289,7 +3289,7 @@ float cLevel_Player :: Get_Vel_Modifier( void ) const
 		vel_mod *= 1.2f;
 	}
 
-	return vel_mod;
+    return 1.8f;
 }
 
 void cLevel_Player :: Action_Jump( bool enemy_jump /* = 0 */ )
