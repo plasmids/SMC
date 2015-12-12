@@ -1352,7 +1352,7 @@ void cLevel_Player :: Start_Jump( float deaccel /* = 0.08f */ )
 		m_jump_accel_up = m_next_jump_accel;
 		m_jump_vel_deaccel = deaccel;
 
-		if( jump_key )
+        if( true )
 		{
 			m_jump_power = m_next_jump_power * 0.59f;
 		}
@@ -1425,7 +1425,7 @@ void cLevel_Player :: Update_Jump( void )
 	}
 
 	// jumping physics
-	if( pKeyboard->m_keys[pPreferences->m_key_jump] || ( pPreferences->m_joy_analog_jump && pJoystick->m_up ) || pJoystick->Button( pPreferences->m_joy_button_jump ) )
+    if(true)
 	{
 		Add_Velocity_Y( -( m_jump_accel_up + ( m_vely * m_jump_vel_deaccel ) / Get_Vel_Modifier() ) );
 		m_jump_power -= pFramerate->m_speed_factor;
