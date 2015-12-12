@@ -31,6 +31,11 @@ cGA_Manager :: ~cGA_Manager()
 
 }
 
+void cGA_Manager :: Update()
+{
+    //pLevel_Player->Move_Player();
+}
+
 bool cGA_Manager :: Compare_Rank(cGA_Run a, cGA_Run b)
 {
     return a.m_score > b.m_score;

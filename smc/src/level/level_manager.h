@@ -19,6 +19,7 @@
 #include "../core/global_basic.h"
 #include "../core/obj_manager.h"
 #include "../core/camera.h"
+#include "../core/ga_manager.h"
 #include "../level/level.h"
 
 namespace SMC

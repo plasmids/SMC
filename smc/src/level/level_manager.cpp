@@ -249,6 +249,9 @@ void cLevel_Manager :: Update( void )
 	// player
 	pLevel_Player->Update();
 
+    //
+    pGA_Manager->Update();
+
 	// update performance timer
 	pFramerate->m_perf_timer[PERF_UPDATE_PLAYER]->Update();
 

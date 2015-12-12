@@ -3,6 +3,7 @@
 
 #include "../core/global_basic.h"
 #include "../core/global_game.h"
+#include "../level/level_player.h"
 
 namespace SMC {
 
@@ -22,6 +23,8 @@ class cGA_Manager {
 public:
     cGA_Manager();
     ~cGA_Manager();
+
+    void Update();
 
     float m_level_length;
     std::vector<cGA_Run> m_runs;
