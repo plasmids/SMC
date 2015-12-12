@@ -12,11 +12,13 @@ public:
     cGA_Run();
     ~cGA_Run();
     void Score(float progress);
+    void Randomize();
 
     float m_score;
     std::vector<float> m_jumps;
     float m_progress;
-    static const float PROGRESS_WEIGHT, JUMPS_WEIGHT;
+
+    static const float PROGRESS_WEIGHT, JUMPS_WEIGHT, JUMP_DENSITY;
 };
 
 class cGA_Manager {
@@ -29,6 +31,7 @@ public:
     float m_level_length;
     std::vector<cGA_Run> m_runs;
     int m_generation;
+    int m_current_run;
 
 protected:
     bool Compare_Rank(cGA_Run a, cGA_Run b);
