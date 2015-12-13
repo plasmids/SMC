@@ -6,6 +6,7 @@
 #include "../level/level_player.h"
 #include <stdlib.h>
 #include <time.h>
+#include <algorithm>
 
 namespace SMC {
 
@@ -14,7 +15,9 @@ public:
     cGA_Run();
     ~cGA_Run();
     void Score(float progress);
+    float Get_Rand_X();
     void Randomize();
+    std::vector<cGA_Run> Mate(cGA_Run partner);
 
     float m_level_length;
     float m_score;

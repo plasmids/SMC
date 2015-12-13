@@ -34,6 +34,11 @@ void cGA_Run :: Score(float progress)
     m_score = progress_score + jump_score;
 }
 
+float cGA_Run :: Get_Rand_X()
+{
+    return static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/m_level_length));
+}
+
 void cGA_Run :: Randomize()
 {
     m_score = 0.0f;
@@ -41,10 +46,19 @@ void cGA_Run :: Randomize()
     m_jumps.clear();
     for (int i=0; i<m_num_jumps; i++)
     {
-        float jump_x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/m_level_length));
+        float jump_x = Get_Rand_X();
         m_jumps.push_back(jump_x);
     }
     std::sort(m_jumps.begin(), m_jumps.end(), std::greater<float>());
+}
+
+std::vector<cGA_Run> cGA_Run :: Mate( cGA_Run partner)
+{
+    float cross_point = Get_Rand_X();
+    std::vector<cGA_Run> children;
+    children.push_back(*this); // TEMPORARY
+    children.push_back(partner);
+    return children;
 }
 
 /*******************************************************************/
@@ -124,6 +138,26 @@ void cGA_Manager :: End_Run()
 void cGA_Manager :: Breed()
 {
     std::sort(m_runs.begin(), m_runs.end(), Compare_Rank);
+    std::vector<cGA_Run> new_runs;
+    int elite_size = 2;
+    int random_size = 2;
+    int num_children = m_population_size - elite_size - random_size;
+    for(int i=0; i<elite_size; i++)
+    {
+        new_runs.push_back(m_runs[i]);
+    }
+    m_runs.erase(m_runs.end()-elite_size, m_runs.end());
+    std::random_shuffle(m_runs.begin(), m_runs.end());
+    for(int j=0; j<num_children; j+=2)
+    {
+        std::vector<cGA_Run> children = m_runs[j].Mate(m_runs[j+1]);
+        new_runs.insert(new_runs.end(), children.begin(), children.end());
+    }
+    for(int k=0; k<random_size; k++)
+    {
+        new_runs.push_back(cGA_Run());
+    }
+    m_runs = new_runs;
     m_current_run_index = 0;
     m_generation++;
 }
