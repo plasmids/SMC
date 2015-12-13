@@ -56,7 +56,23 @@ std::vector<cGA_Run> cGA_Run :: Mate( cGA_Run partner)
 {
     float cross_point = Get_Rand_X();
     std::vector<cGA_Run> children;
-    children.push_back(*this); // TEMPORARY
+    std::vector<float> placeholder_partner, placeholder_this;
+    while(!m_jumps.empty() && m_jumps.back() < cross_point)
+    {
+        placeholder_partner.push_back(m_jumps.back());
+        m_jumps.pop_back();
+    }
+
+    while(!partner.m_jumps.empty() && partner.m_jumps.back() < cross_point)
+    {
+        placeholder_this.push_back(partner.m_jumps.back());
+        partner.m_jumps.pop_back();
+    }
+
+    m_jumps.insert(m_jumps.end(), placeholder_this.rbegin(), placeholder_this.rend());
+    partner.m_jumps.insert(partner.m_jumps.end(), placeholder_partner.rbegin(), placeholder_partner.rend());
+
+    children.push_back(*this);
     children.push_back(partner);
     return children;
 }
@@ -66,7 +82,7 @@ std::vector<cGA_Run> cGA_Run :: Mate( cGA_Run partner)
 cGA_Manager :: cGA_Manager()
 {
     srand(time(NULL));
-    m_population_size = 10;
+    m_population_size = 12;
     m_generation = 0;
     m_current_run_index = 0;
     for(int i=0; i<m_population_size; i++)
@@ -137,9 +153,10 @@ void cGA_Manager :: End_Run()
 
 void cGA_Manager :: Breed()
 {
+    m_generation++;
     std::sort(m_runs.begin(), m_runs.end(), Compare_Rank);
     std::vector<cGA_Run> new_runs;
-    int elite_size = 2;
+    int elite_size = 4;
     int random_size = 2;
     int num_children = m_population_size - elite_size - random_size;
     for(int i=0; i<elite_size; i++)
@@ -147,6 +164,8 @@ void cGA_Manager :: Breed()
         new_runs.push_back(m_runs[i]);
     }
     //m_runs.erase(m_runs.end()-elite_size, m_runs.end());
+    m_runs.erase(m_runs.begin(), m_runs.begin()+2); // to prevent the top runs from dominating
+    //m_runs.erase(m_runs.end()-1); // to get rid of the worst runs
     std::random_shuffle(m_runs.begin(), m_runs.end());
     for(int j=0; j<num_children; j+=2)
     {
@@ -158,8 +177,13 @@ void cGA_Manager :: Breed()
         new_runs.push_back(cGA_Run());
     }
     m_runs = new_runs;
-    m_current_run_index = 0;
-    m_generation++;
+    for(int r=0; r<elite_size; r++)
+    {
+        m_current_run_index = r;
+        Print_Run();
+    }
+    m_current_run_index = elite_size; //to not rerun saved runs
+
 }
 
 void cGA_Manager :: Print_Run()
