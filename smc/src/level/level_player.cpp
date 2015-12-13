@@ -199,7 +199,7 @@ void cLevel_Player :: DownGrade( bool force /* = 0 */ )
 }
 
 void cLevel_Player :: DownGrade_Player( bool delayed /* = 1 */, bool force /* = 0 */ )
-{
+{    
 	if( m_god_mode || m_invincible )
 	{
 		return;
@@ -453,6 +453,8 @@ animation_end:
 	}
 
     Set_Type( MARYO_SMALL, 0, 0 );
+
+    pGA_Manager->End_Run();
 
     Reset_Run();
     std::string str_level = Trim_Filename( pActive_Level->m_level_filename, 0, 0 );
@@ -1294,6 +1296,10 @@ void cLevel_Player :: Update_Jump_Keytime( void )
 
 void cLevel_Player :: Start_Jump( float deaccel /* = 0.08f */ )
 {
+    if( !m_ground_object )
+    {
+        return;
+    }
 	// play sound
 	if( m_next_jump_sound )
 	{

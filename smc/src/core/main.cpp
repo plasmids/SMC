@@ -307,6 +307,8 @@ void Init_Game( void )
 	// set the first active sprite manager available
 	pLevel_Player->Set_Sprite_Manager( pActive_Level->m_sprite_manager );
 
+    pGA_Manager = new cGA_Manager();
+
 	// apply preferences
 	pPreferences->Apply();
 
