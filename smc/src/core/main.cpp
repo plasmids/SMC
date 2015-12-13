@@ -510,6 +510,12 @@ void Exit_Game( void )
 		pResource_Manager = NULL;
 	}
 
+    if( pGA_Manager )
+    {
+        delete pGA_Manager;
+        pGA_Manager = NULL;
+    }
+
 	char *last_sdl_error = SDL_GetError();
 	if( strlen( last_sdl_error ) > 0 )
 	{
