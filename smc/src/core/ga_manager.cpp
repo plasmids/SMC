@@ -146,7 +146,7 @@ void cGA_Manager :: Breed()
     {
         new_runs.push_back(m_runs[i]);
     }
-    m_runs.erase(m_runs.end()-elite_size, m_runs.end());
+    //m_runs.erase(m_runs.end()-elite_size, m_runs.end());
     std::random_shuffle(m_runs.begin(), m_runs.end());
     for(int j=0; j<num_children; j+=2)
     {
