@@ -3295,7 +3295,7 @@ float cLevel_Player :: Get_Vel_Modifier( void ) const
 		vel_mod *= 1.2f;
 	}
 
-    return 1.8f;
+    return 1.55f;
 }
 
 void cLevel_Player :: Action_Jump( bool enemy_jump /* = 0 */ )
