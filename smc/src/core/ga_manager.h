@@ -17,6 +17,7 @@ public:
     void Score(float progress);
     float Get_Rand_X();
     void Randomize();
+    void Mutate();
     std::vector<cGA_Run> Mate(cGA_Run partner);
 
     float m_level_length;

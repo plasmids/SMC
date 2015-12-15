@@ -4,7 +4,7 @@ namespace SMC {
 
 const float cGA_Run::PROGRESS_WEIGHT = 1.0f;
 const float cGA_Run::JUMP_DENSITY = 1 / 300.0f;
-const float cGA_Run::JUMPS_WEIGHT = 0.1f;
+const float cGA_Run::JUMPS_WEIGHT = 0.5f;
 int cGA_Run::m_num_jumps = 0;
 
 bool Compare_Rank(cGA_Run a, cGA_Run b)
@@ -14,9 +14,11 @@ bool Compare_Rank(cGA_Run a, cGA_Run b)
 
 cGA_Run :: cGA_Run()
 {
-    // HACK / HARDCODE !!FIX!! For lvl_1
     m_jumps = std::vector<float>();
-    m_level_length = 8290.0f;
+
+    //m_level_length = 8290.0f; // HARDCODE for lvl 1
+    m_level_length = 11833.0f; // HARDCORE for lvl 2
+
     m_num_jumps = (int) m_level_length * JUMP_DENSITY;
     Randomize();
 }
@@ -52,8 +54,34 @@ void cGA_Run :: Randomize()
     std::sort(m_jumps.begin(), m_jumps.end(), std::greater<float>());
 }
 
+void cGA_Run :: Mutate()
+{
+    float cross_point = (m_progress - 0.05f) * m_level_length;
+    if (cross_point < 0 )
+    {
+        return;
+    }
+    std::vector<float> new_end = cGA_Run().m_jumps;
+    std::vector<float> placeholder;
+    while( !new_end.empty() && new_end.back() < cross_point )
+    {
+        new_end.pop_back();
+    }
+
+    while( !m_jumps.empty() && m_jumps.back() < cross_point)
+    {
+        new_end.push_back(m_jumps.back());
+        m_jumps.pop_back();
+    }
+    std::sort(new_end.begin(), new_end.end(), std::greater<float>());
+    m_jumps = new_end;
+}
+
 std::vector<cGA_Run> cGA_Run :: Mate( cGA_Run partner)
 {
+    this->Mutate();
+    partner.Mutate();
+
     float cross_point = Get_Rand_X();
     std::vector<cGA_Run> children;
     std::vector<float> placeholder_partner, placeholder_this;
