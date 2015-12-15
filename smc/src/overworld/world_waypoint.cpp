@@ -65,7 +65,7 @@ void cWaypoint :: Init( void )
 	m_waypoint_type = WAYPOINT_NORMAL;
 	m_name = _("Waypoint");
 	
-	m_access = 0;
+    m_access = 1;
 	m_access_default = 0;
 	m_direction_forward = DIR_UNDEFINED;
 	m_direction_backward = DIR_UNDEFINED;
@@ -368,7 +368,7 @@ void cWaypoint :: Set_Direction_Backward( ObjectDirection direction )
 
 void cWaypoint :: Set_Access( bool enabled, bool new_start_access /* = 0 */ )
 {
-	m_access = enabled;
+    //m_access = enabled;
 	
 	if( new_start_access )
 	{
