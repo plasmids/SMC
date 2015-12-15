@@ -32,7 +32,7 @@ void cGA_Run :: Score(float progress)
 {
     m_progress = progress;
     float progress_score = PROGRESS_WEIGHT * m_progress;
-    float jump_score = JUMPS_WEIGHT * ( 1 - m_jumps.size() / m_num_jumps );
+    float jump_score = JUMPS_WEIGHT * ( 1 - m_jumps.size() / float(m_num_jumps) );
     m_score = progress_score + jump_score;
 }
 
