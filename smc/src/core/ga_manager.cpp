@@ -59,6 +59,7 @@ void cGA_Run :: Mutate()
     float cross_point = (m_progress - 0.05f) * m_level_length;
     if (cross_point < 0 )
     {
+        this->m_jumps = cGA_Run().m_jumps;
         return;
     }
     std::vector<float> new_end = cGA_Run().m_jumps;
