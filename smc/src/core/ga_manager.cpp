@@ -4,7 +4,7 @@ namespace SMC {
 
 const float cGA_Run::PROGRESS_WEIGHT = 1.0f;
 const float cGA_Run::JUMP_DENSITY = 1 / 300.0f;
-const float cGA_Run::JUMPS_WEIGHT = 0.5f;
+const float cGA_Run::JUMPS_WEIGHT = 0.1f;
 int cGA_Run::m_num_jumps = 0;
 
 bool Compare_Rank(cGA_Run a, cGA_Run b)
